@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "SiliconMind"
+version = "0.1.0"
+description = "A powerful AI agent framework for RTL code generation"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    { name = "Yu-Hung Kao", email = "rb910518@gmail.com" },
+]
+dependencies = [
+    "torch==2.8.0",
+    "torchvision==0.23.0",
+    "torchaudio==2.8.0",
+    "vllm==0.11.0",
+    "transformers==4.57.1",
+    "flashinfer-python==0.4.1",
+    "kernels",
+]
+
+[project.scripts]
+siliconmind = "siliconmind.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/siliconmind"]
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu130" }
+torchvision = { index = "pytorch-cu130" }
+torchaudio = { index = "pytorch-cu130" }
