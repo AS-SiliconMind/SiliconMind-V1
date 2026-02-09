@@ -1,5 +1,18 @@
 import re
 
+
+class Colors:
+    HEADER = "\033[95m"
+    BLUE = "\033[94m"
+    CYAN = "\033[96m"
+    GREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    END = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+
+
 SYS_PROMPT_INTERNAL_WORKFLOW = "Provided below is a Verilog coding problem, I would like you to:\n\n1. Try solving the Verilog coding problem.\n2. Check whether your attempted solution is syntactically correct and satisfies the problem's requirements. Do this by deriving a couple representative test scenarios and pondering your Verilog design's behavior in each test scenario.\n3. If you find your attempted solution to by faulty, fix it according to your own analysis.\n\nThink first INTERNALLY on step 1 to step 3. Then, output ONLY THE CORRECT Verilog code in this format: <answer>\n```verilog\n...\n```\n</answer>. No explanations, comments, or additional text are allowed outside of the specified formatting."
 SYS_PROMPT_ANSWER_GUIDE = "Please solve the following Verilog coding problem. Think first INTERNALLY about how to arrive at the correct solution. Then, output ONLY the Verilog code you designed in this format: <answer>\n```verilog\n...\n```\n</answer>. No explanations, comments, or additional text are allowed outside of the specified formatting."
 SYS_PROMPT_QUANT_DUCK_PT1 = "Please check whether the following Verilog design is syntactically correct and satisfies the problem's requirements.\nFirst, derive a couple representative test scenarios.\nThen, ponder the Verilog design's behavior in each test scenario.\nLastly, if you find the Verilog design to be faulty, write [DESIGN NEEDS FIXING] in your output. Otherwise, output [DESIGN IS CORRECT]."
