@@ -1,4 +1,4 @@
-# SiliconMind
+# SiliconMind-V1
 
 A powerful AI agent framework for RTL code generation.
 
@@ -20,16 +20,16 @@ A powerful AI agent framework for RTL code generation.
 ### Using `uv` (recommended)
 
 ```bash
-git clone https://github.com/yourusername/SiliconMind.git
-cd SiliconMind
+git clone https://github.com/yourusername/SiliconMind-V1.git
+cd SiliconMind-V1
 uv pip install .
 ```
 
 ### Using `pip`
 
 ```bash
-git clone https://github.com/yourusername/SiliconMind.git
-cd SiliconMind
+git clone https://github.com/yourusername/SiliconMind-V1.git
+cd SiliconMind-V1
 pip install .
 ```
 
@@ -140,7 +140,7 @@ Batch version of `debug`. Only designs flagged as `[DESIGN NEEDS FIXING]` are se
 ## Project Structure
 
 ```
-SiliconMind/
+SiliconMind-V1/
 ├── pyproject.toml                 # Package metadata & dependencies
 ├── sample/
 │   ├── agentic.py                # Agentic workflow example
