@@ -20,15 +20,18 @@ A powerful AI agent framework for RTL code generation.
 ### Using `uv` (recommended)
 
 ```bash
-git clone https://github.com/yourusername/SiliconMind-V1.git
+git clone https://github.com/AS-SiliconMind/SiliconMind-V1.git
 cd SiliconMind-V1
+uv sync          # creates .venv and installs deps in one step
+# — or —
+uv venv
 uv pip install .
 ```
 
 ### Using `pip`
 
 ```bash
-git clone https://github.com/yourusername/SiliconMind-V1.git
+git clone https://github.com/AS-SiliconMind/SiliconMind-V1.git
 cd SiliconMind-V1
 pip install .
 ```
