@@ -1,5 +1,98 @@
+import sys
+import argparse
+from vllm import LLM, SamplingParams
+from siliconmind.engine import solve, debug, unified_solve
 
-__version__ = "0.1.0"
 
-def simple_run(data):
-    return f"SiliconMind processed: {data}"
+class Colors:
+    HEADER = "\033[95m"
+    BLUE = "\033[94m"
+    CYAN = "\033[96m"
+    GREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    END = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+
+
+def run_external_workflow(model, sampling_params, problem):
+    sys.stdout.write(
+        f"\n{Colors.HEADER}{Colors.BOLD}{'='*26} Problem {'='*26}{Colors.END}\n"
+    )
+    sys.stdout.write(f"{Colors.CYAN}{problem.strip()}{Colors.END}\n")
+    sys.stdout.write(f"\n{Colors.HEADER}{Colors.BOLD}{'='*64}{Colors.END}\n")
+
+    code = solve(model, sampling_params, problem)
+
+    sys.stdout.write(
+        f"\n{Colors.HEADER}{Colors.BOLD}{'='*20} Generated Code {'='*20}{Colors.END}\n"
+    )
+    sys.stdout.write(f"{Colors.GREEN}{code.strip()}{Colors.END}\n")
+    sys.stdout.write(f"\n{Colors.HEADER}{Colors.BOLD}{'='*64}{Colors.END}\n")
+    for itr in range(1, 4):
+        sys.stdout.write(
+            f"\n{Colors.HEADER}{Colors.BOLD}{'='*20} Debugging Iteration = {itr} {'='*20}{Colors.END}\n"
+        )
+        duck, code = debug(model, sampling_params, problem, code)
+        sys.stdout.write(
+            f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Duck {'-'*20}{Colors.END}\n"
+        )
+        sys.stdout.write(f"{Colors.GREEN}{duck.strip()}{Colors.END}\n")
+        sys.stdout.write(
+            f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Debug Code {'-'*20}{Colors.END}\n"
+        )
+        sys.stdout.write(f"{Colors.GREEN}{code.strip()}{Colors.END}\n")
+        sys.stdout.write(f"\n{Colors.HEADER}{Colors.BOLD}{'='*64}{Colors.END}\n")
+    return
+
+
+def run_internal_workflow(model, sampling_params, problem):
+    code = unified_solve(model, sampling_params, problem)
+    sys.stdout.write(
+        f"\n{Colors.HEADER}{Colors.BOLD}{'='*20} Problem {'='*20}{Colors.END}\n"
+    )
+    sys.stdout.write(f"{Colors.CYAN}{problem.strip()}{Colors.END}\n")
+    sys.stdout.write(f"\n{Colors.HEADER}{Colors.BOLD}{'='*56}{Colors.END}\n")
+    sys.stdout.write(
+        f"\n{Colors.HEADER}{Colors.BOLD}{'='*20} Generated Code {'='*20}{Colors.END}\n"
+    )
+    sys.stdout.write(f"{Colors.GREEN}{code.strip()}{Colors.END}\n")
+    sys.stdout.write(f"\n{Colors.HEADER}{Colors.BOLD}{'='*56}{Colors.END}\n")
+    return
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="SiliconMind: A LLM-based Code Generation Engine for Hardware Design"
+    )
+    parser.add_argument(
+        "--model-path", type=str, required=True, help="Path or repo id to the LLM model"
+    )
+    parser.add_argument(
+        "--mode",
+        type=str,
+        choices=["internal", "external"],
+        default="internal",
+        help="Choose the workflow mode: internal or external",
+    )
+    parser.add_argument(
+        "--prompt",
+        type=str,
+        default="I would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - output zero\n\nThe module should always outputs a LOW.\n\n",
+    )
+    args = parser.parse_args()
+
+    model = LLM(model=args.model_path, max_model_len=16384)
+    sampling_params = SamplingParams(temperature=1.0, max_tokens=16384)
+
+    if args.mode == "external":
+        run_external_workflow(model, sampling_params, args.prompt)
+    else:
+        run_internal_workflow(model, sampling_params, args.prompt)
+
+    return
+
+
+if __name__ == "__main__":
+    main()

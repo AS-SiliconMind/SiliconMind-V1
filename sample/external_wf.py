@@ -34,7 +34,7 @@ sys.stdout.write(
 sys.stdout.write(f"{Colors.GREEN}{code.strip()}{Colors.END}\n")
 sys.stdout.write(f"\n{Colors.HEADER}{Colors.BOLD}{'='*64}{Colors.END}\n")
 
-for itr in range(3):
+for itr in range(1, 4):
     sys.stdout.write(
         f"\n{Colors.HEADER}{Colors.BOLD}{'='*20} Debugging Iteration = {itr} {'='*20}{Colors.END}\n"
     )
