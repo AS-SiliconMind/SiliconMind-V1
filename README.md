@@ -117,7 +117,7 @@ code = unified_solve(model, params, problem)
 | Function | Returns | Description |
 |---|---|---|
 | `solve_batch(model, params, problems)` | `list[str]` | Batch version of `solve` |
-| `debug_batch(model, params, problems, attempts)` | `list[str]` | Batch version of `debug` — only `[DESIGN NEEDS FIXING]` entries are re-generated |
+| `debug_batch(model, params, problems, attempts)` | `tuple[list[str], list[str]]` | Batch version of `debug` — only `[DESIGN NEEDS FIXING]` entries are re-generated |
 | `unified_solve_batch(model, params, problems)` | `list[str]` | Batch version of `unified_solve` |
 
 **Common parameters**
