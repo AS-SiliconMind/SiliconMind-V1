@@ -3,10 +3,6 @@ import sys
 from vllm import LLM, SamplingParams
 from siliconmind.engine import solve, debug
 
-from llm_serving.vllm.vllm_repo.tests.models.language.pooling.test_scoring import (
-    model_name,
-)
-
 
 class Colors:
     HEADER = "\033[95m"
