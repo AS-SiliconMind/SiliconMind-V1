@@ -6,9 +6,9 @@ A powerful AI agent framework for RTL code generation.
 
 - **RTL Generation**: Generate Verilog code from natural language problem descriptions.
 - **Dual Workflow Modes**:
-  - **Internal**: The model solves, self-verifies, and self-corrects in a single generation pass.
-  - **External**: A multi-step pipeline where generation and reflective debugging ("duck" debugging) are separate, iterative stages.
-- **Reflective Debugging**: An external review loop where the model derives test scenarios, evaluates its own design, and fixes issues flagged as `[DESIGN NEEDS FIXING]`.
+  - **Deep Thinking**: The model solves, self-verifies, and self-corrects in a single generation pass.
+  - **Agentic**: A multi-step pipeline where generation and reflective debugging ("duck" debugging) are separate, iterative stages.
+- **Reflective Debugging**: An agentic review loop where the model derives test scenarios, evaluates its own design, and fixes issues flagged as `[DESIGN NEEDS FIXING]`.
 - **Batch Processing**: Batch variants of all core functions for high-throughput workloads.
 - **VLLM Integration**: Built on VLLM for high-performance LLM inference.
 - **CLI Tool**: A ready-to-use command-line entry point (`slcm`).
@@ -40,17 +40,17 @@ pip install .
 After installation a `slcm` command is available:
 
 ```bash
-# Internal workflow (default) — single-pass solve + self-debug
+# Deep thinking workflow (default) — single-pass solve + self-debug
 slcm --model-path /path/to/your/model
 
-# External workflow — iterative solve → duck → debug loop
-slcm --model-path /path/to/your/model --mode external
+# Agentic workflow — iterative solve → duck → debug loop
+slcm --model-path /path/to/your/model --mode agentic
 
 # Custom prompt
 slcm --model-path /path/to/your/model --prompt "I would like you to implement ..."
 ```
 
-### Python API — External Workflow
+### Python API — Agentic Workflow
 
 Use `solve` and `debug` when you want explicit control over each iteration:
 
@@ -78,7 +78,7 @@ for itr in range(3):
     # or [DESIGN NEEDS FIXING]). code is updated only when a fix is applied.
 ```
 
-### Python API — Internal Workflow
+### Python API — Deep Thinking Workflow
 
 Use `unified_solve` when the model handles solving and self-debugging in one pass:
 
@@ -94,7 +94,7 @@ problem = "..."
 code = unified_solve(model, sampling_params, problem)
 ```
 
-For complete runnable examples, see [sample/external_wf.py](sample/external_wf.py) and [sample/internal_wf.py](sample/internal_wf.py).
+For complete runnable examples, see [sample/agentic.py](sample/agentic.py) and [sample/deepthinking.py](sample/deepthinking.py).
 
 ## API Reference
 
@@ -102,7 +102,7 @@ For complete runnable examples, see [sample/external_wf.py](sample/external_wf.p
 
 #### `solve(model, sampling_params, problem: str) -> str`
 
-Generates Verilog code for a single problem description (external workflow).
+Generates Verilog code for a single problem description (agentic workflow).
 
 - **model**: An initialized `vllm.LLM` instance.
 - **sampling_params**: A `vllm.SamplingParams` instance.
@@ -119,7 +119,7 @@ Performs one round of reflective debugging on the given `attempt`. The model fir
 
 #### `unified_solve(model, sampling_params, problem: str) -> str`
 
-Generates Verilog code using the internal workflow, where the model solves, self-verifies, and self-corrects within a single generation pass.
+Generates Verilog code using the deep thinking workflow, where the model solves, self-verifies, and self-corrects within a single generation pass.
 
 - **Returns**: The generated Verilog code as a string.
 
@@ -143,8 +143,8 @@ Batch version of `debug`. Only designs flagged as `[DESIGN NEEDS FIXING]` are se
 SiliconMind/
 ├── pyproject.toml                 # Package metadata & dependencies
 ├── sample/
-│   ├── external_wf.py            # External workflow example
-│   └── internal_wf.py            # Internal workflow example
+│   ├── agentic.py                # Agentic workflow example
+│   └── deepthinking.py           # Deep thinking workflow example
 └── src/siliconmind/
     ├── __init__.py
     ├── cli.py                     # CLI entry point (slcm)
@@ -158,4 +158,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is licensed under the [Apache License 2.0](LICENSE).

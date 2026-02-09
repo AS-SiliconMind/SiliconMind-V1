@@ -1,6 +1,11 @@
+import argparse
 import sys
 from vllm import LLM, SamplingParams
 from siliconmind.engine import solve, debug
+
+from llm_serving.vllm.vllm_repo.tests.models.language.pooling.test_scoring import (
+    model_name,
+)
 
 
 class Colors:
@@ -15,8 +20,15 @@ class Colors:
     UNDERLINE = "\033[4m"
 
 
-model_name = "/mnt/llm_team/silicon_mind/qwen3-4b-think_oss-other-duck"
-model = LLM(model=model_name, max_model_len=16384)
+paser = argparse.ArgumentParser(description="Run external workflow")
+paser.add_argument(
+    "--model-path",
+    type=str,
+    required=True,
+    help="Path to the LLM model",
+)
+args = paser.parse_args()
+model = LLM(model=args.model_path, max_model_len=16384)
 sampling_params = SamplingParams(temperature=1.0, max_tokens=16384)
 problem = "I would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - output zero\n\nThe module should always outputs a LOW.\n\n"
 

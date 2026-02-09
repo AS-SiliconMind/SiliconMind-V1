@@ -16,7 +16,7 @@ class Colors:
     UNDERLINE = "\033[4m"
 
 
-def run_external_workflow(model, sampling_params, problem):
+def run_agentic(model, sampling_params, problem):
     sys.stdout.write(
         f"\n{Colors.HEADER}{Colors.BOLD}{'='*26} Problem {'='*26}{Colors.END}\n"
     )
@@ -47,7 +47,7 @@ def run_external_workflow(model, sampling_params, problem):
     return
 
 
-def run_internal_workflow(model, sampling_params, problem):
+def run_deepthinking(model, sampling_params, problem):
     code = unified_solve(model, sampling_params, problem)
     sys.stdout.write(
         f"\n{Colors.HEADER}{Colors.BOLD}{'='*20} Problem {'='*20}{Colors.END}\n"
@@ -72,7 +72,7 @@ def main():
     parser.add_argument(
         "--mode",
         type=str,
-        choices=["internal", "external"],
+        choices=["deepthinking", "agentic"],
         default="internal",
         help="Choose the workflow mode: internal or external",
     )
@@ -86,10 +86,10 @@ def main():
     model = LLM(model=args.model_path, max_model_len=16384)
     sampling_params = SamplingParams(temperature=1.0, max_tokens=16384)
 
-    if args.mode == "external":
-        run_external_workflow(model, sampling_params, args.prompt)
+    if args.mode == "agentic":
+        run_agentic(model, sampling_params, args.prompt)
     else:
-        run_internal_workflow(model, sampling_params, args.prompt)
+        run_deepthinking(model, sampling_params, args.prompt)
 
     return
 
