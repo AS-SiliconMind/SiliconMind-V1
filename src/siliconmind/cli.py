@@ -65,7 +65,7 @@ def main():
         type=str,
         choices=["deepthinking", "agentic"],
         default="agentic",
-        help="Choose the workflow mode: internal or external",
+        help="Choose the workflow mode",
     )
     parser.add_argument(
         "--prompt",
