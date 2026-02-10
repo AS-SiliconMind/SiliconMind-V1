@@ -1,5 +1,8 @@
 import argparse
 import sys
+from llm_serving.vllm.vllm_repo.tests.tool_use.test_deepseekv31_tool_parser import (
+    parser,
+)
 from utils import Colors
 from vllm import LLM, SamplingParams
 from siliconmind.engine import solve, debug
@@ -10,6 +13,9 @@ paser.add_argument(
     type=str,
     required=True,
     help="Path to the LLM model",
+)
+parser.add_argument(
+    "--debug", action="store_true", help="Whether to run in agentic debugging mode"
 )
 args = paser.parse_args()
 model = LLM(model=args.model_path, max_model_len=16384)
@@ -30,17 +36,18 @@ sys.stdout.write(
 sys.stdout.write(f"{Colors.GREEN}{code.strip()}{Colors.END}\n")
 sys.stdout.write(f"\n{Colors.HEADER}{Colors.BOLD}{'='*64}{Colors.END}\n")
 
-for itr in range(1, 4):
-    sys.stdout.write(
-        f"\n{Colors.HEADER}{Colors.BOLD}{'='*20} Debugging Iteration = {itr} {'='*20}{Colors.END}\n"
-    )
-    duck, code = debug(model, sampling_params, problem, code)
-    sys.stdout.write(
-        f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Duck {'-'*20}{Colors.END}\n"
-    )
-    sys.stdout.write(f"{Colors.GREEN}{duck.strip()}{Colors.END}\n")
-    sys.stdout.write(
-        f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Debug Code {'-'*20}{Colors.END}\n"
-    )
-    sys.stdout.write(f"{Colors.GREEN}{code.strip()}{Colors.END}\n")
-    sys.stdout.write(f"\n{Colors.HEADER}{Colors.BOLD}{'='*64}{Colors.END}\n")
+if args.debug:
+    for itr in range(1, 4):
+        sys.stdout.write(
+            f"\n{Colors.HEADER}{Colors.BOLD}{'='*20} Debugging Iteration = {itr} {'='*20}{Colors.END}\n"
+        )
+        duck, code = debug(model, sampling_params, problem, code)
+        sys.stdout.write(
+            f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Duck {'-'*20}{Colors.END}\n"
+        )
+        sys.stdout.write(f"{Colors.GREEN}{duck.strip()}{Colors.END}\n")
+        sys.stdout.write(
+            f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Debug Code {'-'*20}{Colors.END}\n"
+        )
+        sys.stdout.write(f"{Colors.GREEN}{code.strip()}{Colors.END}\n")
+        sys.stdout.write(f"\n{Colors.HEADER}{Colors.BOLD}{'='*64}{Colors.END}\n")
