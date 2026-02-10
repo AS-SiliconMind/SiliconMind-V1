@@ -7,7 +7,7 @@ A powerful AI agent framework for RTL code generation.
 | | |
 |---|---|
 | **RTL Generation** | Generate Verilog code from natural language problem descriptions |
-| **Dual Workflow** | *Regular* (default) — single solve pass (agentic without debug) · *Debug* (`--debug`) — iterative solve → duck → debug loop · *Deep Thinking* — single-pass solve + self-debug |
+| **Multiple Workflows** | *Regular* (default) — single solve pass (agentic without debug) · *Debug* (`--debug`) — iterative solve → duck → debug loop · *Deep Thinking* — single-pass solve + self-debug |
 | **Reflective Debugging** | Self-review loop: derive test scenarios → evaluate design → fix issues flagged `[DESIGN NEEDS FIXING]` |
 | **Batch Processing** | Batch variants of all core functions for high-throughput workloads |
 | **vLLM Integration** | Built on [vLLM](https://github.com/vllm-project/vllm) for high-performance LLM inference |
