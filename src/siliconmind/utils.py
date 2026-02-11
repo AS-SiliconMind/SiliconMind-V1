@@ -15,8 +15,8 @@ class Colors:
 
 SYS_PROMPT_INTERNAL_WORKFLOW = "Provided below is a Verilog coding problem, I would like you to:\n\n1. Try solving the Verilog coding problem.\n2. Check whether your attempted solution is syntactically correct and satisfies the problem's requirements. Do this by deriving a couple representative test scenarios and pondering your Verilog design's behavior in each test scenario.\n3. If you find your attempted solution to by faulty, fix it according to your own analysis.\n\nThink first INTERNALLY on step 1 to step 3. Then, output ONLY THE CORRECT Verilog code in this format: <answer>\n```verilog\n...\n```\n</answer>. No explanations, comments, or additional text are allowed outside of the specified formatting."
 SYS_PROMPT_ANSWER_GUIDE = "Please solve the following Verilog coding problem. Think first INTERNALLY about how to arrive at the correct solution. Then, output ONLY the Verilog code you designed in this format: <answer>\n```verilog\n...\n```\n</answer>. No explanations, comments, or additional text are allowed outside of the specified formatting."
-SYS_PROMPT_QUANT_DUCK_PT1 = "Please check whether the following Verilog design is syntactically correct and satisfies the problem's requirements.\nFirst, derive a couple representative test scenarios.\nThen, ponder the Verilog design's behavior in each test scenario.\nLastly, if you find the Verilog design to be faulty, write [DESIGN NEEDS FIXING] in your output. Otherwise, output [DESIGN IS CORRECT]."
-SYS_PROMPT_QUANT_DUCK_PT2 = "Fix the attempted solution to the Verilog design problem using the provided error analysis.\nThink first INTERNALLY about how to arrive at the correct solution. Then, output ONLY the Verilog code you designed in this format: <answer>\n```verilog\n...\n```\n</answer>. No explanations, comments, or additional text are allowed outside of the specified formatting."
+SYS_PROMPT_QUANT_TEST_PT1 = "Please check whether the following Verilog design is syntactically correct and satisfies the problem's requirements.\nFirst, derive a couple representative test scenarios.\nThen, ponder the Verilog design's behavior in each test scenario.\nLastly, if you find the Verilog design to be faulty, write [DESIGN NEEDS FIXING] in your output. Otherwise, output [DESIGN IS CORRECT]."
+SYS_PROMPT_QUANT_TEST_PT2 = "Fix the attempted solution to the Verilog design problem using the provided error analysis.\nThink first INTERNALLY about how to arrive at the correct solution. Then, output ONLY the Verilog code you designed in this format: <answer>\n```verilog\n...\n```\n</answer>. No explanations, comments, or additional text are allowed outside of the specified formatting."
 
 
 def parse_text(text: str) -> str:
@@ -85,14 +85,14 @@ def get_attempt_prompts(problems: list[str], internal_workflow: bool) -> list:
     return prompts
 
 
-def get_duck_prompts(problems: list[str], attempts: list[str]) -> list:
+def get_test_prompts(problems: list[str], attempts: list[str]) -> list:
     assert len(problems) == len(attempts)
 
     prompts = []
     for p, a in zip(problems, attempts):
         prompts.append(
             wrap_prompt(
-                SYS_PROMPT_QUANT_DUCK_PT1
+                SYS_PROMPT_QUANT_TEST_PT1
                 + f"\n\n### Problem\n\n{wrap_text(p)}"
                 + f"\n\n### Verilog Design\n\n{wrap_code(a)}"
             )
@@ -111,7 +111,7 @@ def get_debug_prompts(
     for p, a, e in zip(problems, attempts, error_analysis):
         prompts.append(
             wrap_prompt(
-                SYS_PROMPT_QUANT_DUCK_PT2
+                SYS_PROMPT_QUANT_TEST_PT2
                 + f"\n\n### Verilog Design Problem\n\n{wrap_text(p)}"
                 + f"\n\n### Attempted Solution\n\n{wrap_code(a)}"
                 + f"\n\n### Error Analysis\n\n{wrap_text(e)}"

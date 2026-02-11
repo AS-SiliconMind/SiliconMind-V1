@@ -1,9 +1,10 @@
-import sys
 import argparse
+import sys
+
 from utils import Colors
 from vllm import LLM, SamplingParams
-from siliconmind.engine import solve_batch, debug_batch
 
+from siliconmind.engine import debug_batch, solve_batch
 
 paser = argparse.ArgumentParser(description="Run external workflow")
 paser.add_argument(
@@ -39,19 +40,19 @@ for i, (problem, code) in enumerate(zip(problems, outputs), 1):
 
 if args.debug:
     for itr in range(1, 4):
-        ducks, outputs = debug_batch(model, sampling_params, problems, outputs)
+        tests, outputs = debug_batch(model, sampling_params, problems, outputs)
         sys.stdout.write(
             f"\n{Colors.HEADER}{Colors.BOLD}{'='*20} Debugging Iteration = {itr} {'='*20}{Colors.END}\n"
         )
-        for i, (problem, duck, code) in enumerate(zip(problems, ducks, outputs), 1):
+        for i, (problem, test, code) in enumerate(zip(problems, tests, outputs), 1):
             sys.stdout.write(
                 f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Problem {i} {'-'*20}{Colors.END}\n"
             )
             sys.stdout.write(f"{Colors.CYAN}{problem.strip()}{Colors.END}\n")
             sys.stdout.write(
-                f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Duck {'-'*20}{Colors.END}\n"
+                f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Test {'-'*20}{Colors.END}\n"
             )
-            sys.stdout.write(f"{Colors.GREEN}{duck.strip()}{Colors.END}\n")
+            sys.stdout.write(f"{Colors.GREEN}{test.strip()}{Colors.END}\n")
             sys.stdout.write(
                 f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Debug Code {'-'*20}{Colors.END}\n"
             )

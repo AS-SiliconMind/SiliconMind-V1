@@ -4,7 +4,6 @@ from utils import Colors
 from vllm import LLM, SamplingParams
 from siliconmind.engine import unified_solve_batch
 
-
 parser = argparse.ArgumentParser(description="Run internal workflow")
 parser.add_argument(
     "--model-path",

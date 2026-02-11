@@ -1,11 +1,13 @@
 import argparse
 import sys
+
 from llm_serving.vllm.vllm_repo.tests.tool_use.test_deepseekv31_tool_parser import (
     parser,
 )
 from utils import Colors
 from vllm import LLM, SamplingParams
-from siliconmind.engine import solve, debug
+
+from siliconmind.engine import debug, solve
 
 paser = argparse.ArgumentParser(description="Run external workflow")
 paser.add_argument(
@@ -41,11 +43,11 @@ if args.debug:
         sys.stdout.write(
             f"\n{Colors.HEADER}{Colors.BOLD}{'='*20} Debugging Iteration = {itr} {'='*20}{Colors.END}\n"
         )
-        duck, code = debug(model, sampling_params, problem, code)
+        test, code = debug(model, sampling_params, problem, code)
         sys.stdout.write(
-            f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Duck {'-'*20}{Colors.END}\n"
+            f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Test {'-'*20}{Colors.END}\n"
         )
-        sys.stdout.write(f"{Colors.GREEN}{duck.strip()}{Colors.END}\n")
+        sys.stdout.write(f"{Colors.GREEN}{test.strip()}{Colors.END}\n")
         sys.stdout.write(
             f"\n{Colors.WARNING}{Colors.BOLD}{'-'*20} Debug Code {'-'*20}{Colors.END}\n"
         )

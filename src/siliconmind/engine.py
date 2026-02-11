@@ -1,8 +1,8 @@
 from siliconmind.utils import (
     get_attempt_prompts,
-    parse_code,
-    get_duck_prompts,
     get_debug_prompts,
+    get_test_prompts,
+    parse_code,
     parse_text,
 )
 
@@ -40,41 +40,41 @@ def solve_batch(model, sampling_params, problems: list[str]):
 
 
 def debug(model, sampling_params, problem: str, attempt: str):
-    duck_prompt = get_duck_prompts([problem], [attempt])[0]
-    gen = model.chat([duck_prompt], sampling_params)[0]
-    duck = parse_text(gen.outputs[0].text)
-    a = "[DESIGN IS CORRECT]" in duck
-    b = "[DESIGN NEEDS FIXING]" in duck
+    test_prompt = get_test_prompts([problem], [attempt])[0]
+    gen = model.chat([test_prompt], sampling_params)[0]
+    test = parse_text(gen.outputs[0].text)
+    a = "[DESIGN IS CORRECT]" in test
+    b = "[DESIGN NEEDS FIXING]" in test
     if (a and b) or (not a and not b):
-        return duck, attempt
+        return test, attempt
     if a:
-        return duck, attempt
-    debug_prompt = get_debug_prompts([problem], [attempt], [duck])[0]
+        return test, attempt
+    debug_prompt = get_debug_prompts([problem], [attempt], [test])[0]
     debug_gen = model.chat([debug_prompt], sampling_params)[0]
     debug_code = parse_code(debug_gen.outputs[0].text)
     if debug_code:
-        return duck, debug_code
+        return test, debug_code
     else:
-        return duck, attempt
+        return test, attempt
 
 
 def debug_batch(model, sampling_params, problems, attempts):
-    duck_prompts = get_duck_prompts(problems, attempts)
-    gens = model.chat(duck_prompts, sampling_params)
+    test_prompts = get_test_prompts(problems, attempts)
+    gens = model.chat(test_prompts, sampling_params)
     bad_indexes = []
     for i, gen in enumerate(gens):
-        duck = parse_text(gen.outputs[0].text)
-        a = "[DESIGN IS CORRECT]" in duck
-        b = "[DESIGN NEEDS FIXING]" in duck
+        test = parse_text(gen.outputs[0].text)
+        a = "[DESIGN IS CORRECT]" in test
+        b = "[DESIGN NEEDS FIXING]" in test
         if (a and b) or (not a and not b):
             continue
         if b:
-            bad_indexes.append((i, duck))
+            bad_indexes.append((i, test))
     if bad_indexes:
         debug_problems = [problems[i] for i, _ in bad_indexes]
         debug_attempts = [attempts[i] for i, _ in bad_indexes]
-        debug_ducks = [duck for _, duck in bad_indexes]
-        debug_prompts = get_debug_prompts(debug_problems, debug_attempts, debug_ducks)
+        debug_tests = [test for _, test in bad_indexes]
+        debug_prompts = get_debug_prompts(debug_problems, debug_attempts, debug_tests)
         debug_gens = model.chat(debug_prompts, sampling_params)
         for i, gen in enumerate(debug_gens):
             debug_code = parse_code(gen.outputs[0].text)
