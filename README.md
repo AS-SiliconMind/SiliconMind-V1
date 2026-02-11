@@ -4,16 +4,16 @@ This repository contains the codebase of SiliconMind Inference Engine for Silico
 
 - Webpage: https://AS-SiliconMind.github.io/SiliconMind-V1
 - Paper: [SiliconMind-V1: Multi-Agent Distillation and Debug-Reasoning Workflows for Verilog Code Generation]()
-- Models: [SiliconMind-V1](https://huggingface.co/collections/AS-SiliconMind/siliconmind-v1)
+- Models: [SiliconMind-V1 Series (4 fine-tuned models)](https://huggingface.co/collections/AS-SiliconMind/siliconmind-v1)
 
 <p align="center">
-    <img src="https://github.com/AS-SiliconMind/SiliconMind-V1/blob/gh-pages/images/figure-workflow.webp?raw=true" alt="Framework Overview" width="400">
+    <img src="https://github.com/AS-SiliconMind/SiliconMind-V1/blob/gh-pages/images/figure-workflow.webp?raw=true" alt="SiliconMind Inference Engine" width="400">
 </p>
 
 ## Features
 
 - **RTL Generation**: Generate Verilog code from natural language problem descriptions
-- **Multiple Workflows**: *Regular* (default) — single solve pass (agentic without debug) · *Debug* (`--debug`) — iterative solve → trace → debug loop · *Deep Thinking* — single-pass solve + self-debug
+- **Multiple Workflows**: *Regular* (default) — single solve pass (agentic without debug) · *Deep Thinking* — single-pass solve + self-debug · *Agentic* — iterative solve → trace → debug loop
 - **Reflective Debugging**: Self-review loop: derive test scenarios → evaluate design → fix issues flagged `[DESIGN NEEDS FIXING]`
 - **Batch Processing**: Batch variants of all core functions for high-throughput workloads
 - **vLLM Integration**: Built on [vLLM](https://github.com/vllm-project/vllm) for high-performance LLM inference
