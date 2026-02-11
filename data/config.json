@@ -1,0 +1,75 @@
+{
+    "ga_measurement_id": "G-B3KPCPNRHK",
+    "site_url": "https://AS-SiliconMind.github.io/SiliconMind-V1",
+    "meta_description": "A powerful AI agent framework for RTL code generation",
+    "title": "SiliconMind-V1: Multi-Agent Distillation and Debug-Reasoning Workflows for Verilog Code Generation",
+    "authors": [
+        {"name": "Mu-Chi Chen", "affiliations": [1, 2], "orcid": "0009-0007-6013-4122"},
+        {"name": "Yu-Hung Kao", "affiliations": [2], "orcid": "0009-0002-6991-8795"},
+        {"name": "Po-Hsuan Huang", "affiliations": [2], "orcid": "0000-0002-7458-9634"},
+        {"name": "Shao-Chun Ho", "affiliations": [2], "orcid": "0009-0000-7363-2947"},
+        {"name": "Hsiang-Yu Tsou", "affiliations": [2], "orcid": "0009-0003-1825-0622"},
+        {"name": "I-Ting Wu", "affiliations": [2], "orcid": "0009-0004-0921-1637"},
+        {"name": "En-Ming Huang", "affiliations": [2], "orcid": "0000-0003-2196-2834"},
+        {"name": "Yu-Kai Hung", "affiliations": [2], "orcid": "0009-0007-0310-4883"},
+        {"name": "Wei-Po Hsin", "affiliations": [2], "orcid": "0009-0000-4015-6083"},
+        {"name": "Cheng Liang", "affiliations": [2], "orcid": "0009-0009-1532-3332"},
+        {"name": "Chia-Heng Tu", "affiliations": [3], "orcid": "0000-0001-8967-1385"},
+        {"name": "Shih-Hao Hung", "affiliations": [2], "orcid": "0000-0003-2043-2663"},
+        {"name": "H. T. Kung", "affiliations": [4], "orcid": "0000-0002-3348-3788"}
+    ],
+    "affiliations": [
+        "Academia Sinica, Taipei, Taiwan",
+        "National Taiwan University, Taipei, Taiwan",
+        "National Cheng Kung University, Tainan, Taiwan",
+        "Harvard University, Cambridge, Massachusetts, USA"
+    ],
+    "links": [
+        {
+            "name": "Code",
+            "url": "https://github.com/AS-SiliconMind/SiliconMind-V1",
+            "icon": "github"
+        },
+        {
+            "name": "Whitepaper",
+            "url": "https://drive.google.com/file/d/1-Ismn1EVEYBG1bxFYlE5NvOjakEk6RuC/view?usp=sharing",
+            "icon": "paper"
+        },
+        {
+            "name": "Paper (coming soon)",
+            "url": "#",
+            "icon": "arxiv"
+        },
+        {
+            "name": "Models",
+            "url": "https://huggingface.co/collections/AS-SiliconMind/siliconmind-v1",
+            "icon": "cube"
+        },
+        {
+            "name": "Demo",
+            "url": "https://youtu.be/FNclOkRrrsw",
+            "icon": "youtube"
+        }
+    ],
+    "abstract": "Large language models (LLMs) have recently emerged as a promising approach for automating Verilog code generation; however, existing methods primarily emphasize syntactic correctness and often rely on commercial models or external verification tools, which introduces concerns regarding cost, data privacy, and limited guarantees of functional correctness. This work proposes a unified multi-agent framework for reasoning-oriented training data generation with integrated testbench-driven verification, enabling locally fine-tuned LLMs, SiliconMind-V1, to iteratively generate, test, and debug Register-Transfer Level (RTL) designs through test-time scaling. Experimental results on representative benchmarks (VerilogEval-v2, RTLLM-v2, and CVDP) demonstrate that the proposed approach outperforms the state-of-the-art QiMeng-CodeV-R1 in functional correctness while using fewer training resources.",
+    "overview": "<div class=\"result-card\"><p>Two major components, the Training Data Pipeline and the SiliconMind Inference Engine, are developed to produce high-quality training data and generate Verilog code based on user specifications. The former addresses the scarcity, quality, and diversity issues common in public Verilog datasets, while the latter enables the fine-tuned LLMs to fully leverage their learned skills to generate the final Verilog code.</p><img src=\"images/figure-web.webp\" alt=\"Framework Overview\" class=\"overview-image\" alt=\"Framework Overview\" loading=\"lazy\" style=\"max-width: 100%; height: auto; margin-top: 1em;\"></div>",
+    "results": [
+        {
+            "title": "Main Results: Pass@k=1,3,5 Performance (%)",
+            "description": "This table summarizes performance under the Agentic inference strategy with at most three test-debug interactions. SiliconMind-V1 based on Qwen2.5-Coder-7B-Instruct outperforms CodeV-R1 on VerilogEval-v2-NTU and CVDP-cid02&03, matches it on VerilogEval-v2, and is slightly worse on RTLLM-v2. Overall, SiliconMind-V1 models generally exceed Qwen3-14B and Qwen3-32B, with limited exceptions. Notably, the Qwen3-4B-Thinking-2507 variant, despite being 171x smaller, nearly matches DeepSeek-R1-0528, with only a 0.8-6.3% performance gap.",
+            "image": "images/figure-compare.webp"
+        },
+        {
+            "title": "Test-Time Scaling: Pass@1 Performance (%) vs. Average Token Cost Trade-off",
+            "description": "Using regular inference as the baseline, Deep Thinking improves pass@1 by 0.53-1.28% with a 1.14-1.26x token cost. The Agentic strategy provides larger gains, with one interaction improving performance by 2.0% at 2.1x cost, and diminishing returns with additional interactions. Among fine-tuned models, Olmo-3-7B-Think demonstrates the most favorable performance scaling with increased token usage, achieving larger performance gains as inference cost grows compared to other variants.",
+            "image": "images/figure-tts.webp"
+        }
+    ],
+    "acknowledgements": "We acknowledge the financial support from Academia Sinica's SiliconMind Project (AS-IAIA-114-M11). We also thank the National Center for High-Performance Computing (NCHC) for providing computational and storage resources, and Taipei-1 for providing H100 computing resources. In addition, we acknowledge financial support from the National Science and Technology Council.",
+    "citation": "data/cite.bib",
+    "footer": {
+        "copyright_year": "2026",
+        "project_name": "AS-SiliconMind",
+        "text": "All rights reserved."
+    }
+}

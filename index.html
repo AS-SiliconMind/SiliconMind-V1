@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Open source project introduction with repository and research paper.">
+    <title>Project Introduction</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Critical CSS inline for faster first paint -->
+    <style>
+        :root {
+            --bg-color: #f7fafc;
+            --text-dark: #1a202c;
+            --accent-color: #4a5568;
+            --secondary-color: #2d3748;
+            --card-bg: #fff;
+            --border-color: #e2e8f0
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            width: 90%;
+            margin: 3rem auto;
+            padding: 0 1rem
+        }
+
+        #header {
+            text-align: center;
+            margin-bottom: 2rem
+        }
+
+        #paper-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            min-height: 3.5rem;
+            line-height: 1.2
+        }
+
+        .authors {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            min-height: 2rem;
+            margin-bottom: 0.5rem
+        }
+
+        .affiliations {
+            font-size: 0.95rem;
+            color: var(--accent-color);
+            min-height: 1.5rem
+        }
+
+        .affiliations sup,
+        .authors sup {
+            font-size: 0.75em;
+            margin-left: 0.1em
+        }
+
+        .link-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            min-height: 50px
+        }
+
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            background: var(--secondary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600
+        }
+
+        .link-btn svg {
+            width: 1.1em;
+            height: 1.1em;
+            fill: currentColor
+        }
+
+        .abstract-text,
+        .overview-text {
+            min-height: 100px
+        }
+
+        .placeholder {
+            color: transparent
+        }
+
+        .results-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem
+        }
+
+        .result-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+        }
+
+        .result-card.placeholder-card {
+            min-height: 400px
+        }
+
+        .result-card h3 {
+            font-size: 1.4rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            min-height: 1.8rem
+        }
+
+        .result-card p {
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            min-height: 1.5rem
+        }
+
+        .result-card .img-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #f0f0f0;
+            border-radius: 6px
+        }
+
+        footer {
+            background: var(--card-bg);
+            text-align: center;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem
+        }
+    </style>
+
+    <!-- Main CSS with low priority -->
+    <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="css/styles.css">
+    </noscript>
+
+    <link rel="canonical" href="https://yourwebsite.com/">
+</head>
+
+<body>
+    <main>
+        <section id="header">
+            <h1 id="paper-title" class="placeholder">Loading Paper Title Here</h1>
+            <p id="authors" class="authors placeholder">Loading authors here</p>
+            <p id="affiliations" class="affiliations placeholder">Loading affiliations</p>
+        </section>
+
+        <section id="links">
+            <div id="link-buttons" class="link-buttons">
+                <span class="placeholder">Loading links...</span>
+            </div>
+        </section>
+
+        <section id="abstract">
+            <h2>Abstract</h2>
+            <p id="abstract-text" class="abstract-text placeholder">Loading abstract content. This placeholder text
+                reserves vertical space to prevent layout shift when the actual content loads dynamically from the
+                configuration file.</p>
+        </section>
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <p id="overview-text" class="overview-text placeholder">Loading overview content. This placeholder text
+                reserves vertical space to prevent layout shift when the actual content loads dynamically from the
+                configuration file.</p>
+        </section>
+
+        <section id="results">
+            <h2>Highlighted Results</h2>
+            <div id="results-content" class="results-content">
+                <!-- Placeholder cards to prevent layout shift -->
+                <div class="result-card placeholder-card">
+                    <h3 class="placeholder">Result Title</h3>
+                    <p class="placeholder">Result description placeholder</p>
+                    <div class="img-placeholder"></div>
+                </div>
+                <div class="result-card placeholder-card">
+                    <h3 class="placeholder">Result Title</h3>
+                    <p class="placeholder">Result description placeholder</p>
+                    <div class="img-placeholder"></div>
+                </div>
+                <div class="result-card placeholder-card">
+                    <h3 class="placeholder">Result Title</h3>
+                    <p class="placeholder">Result description placeholder</p>
+                    <div class="img-placeholder"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="acknowledgements">
+            <h2>Acknowledgements</h2>
+            <p id="acknowledgements-text" class="placeholder">Loading acknowledgements content. This placeholder text
+                reserves vertical space to prevent layout shift when the actual content loads dynamically from the
+                configuration file.</p>
+        </section>
+
+        <section id="citation">
+            <h2>Citation</h2>
+            <div class="citation-container">
+                <button id="copy-citation" class="copy-btn" title="Copy to clipboard">
+                    <svg viewBox="0 0 448 512" width="16" height="16"><path d="M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"/></svg>
+                </button>
+                <pre id="citation-text" class="citation-text placeholder"><code>@misc{loading,
+  title = {Loading citation...}
+}</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p id="footer-text" class="placeholder">Project Name. Open Source Project.</p>
+        <p><a href="privacy.html" class="footer-link">Privacy Policy</a> • <a
+                href="https://github.com/aben20807/PaperPageTemplate" class="footer-link" target="_blank"
+                rel="noopener noreferrer">PaperPageTemplate</a></p>
+    </footer>
+    <script src="js/main.js" defer></script>
+    <!-- Google Analytics loaded after page content -->
+    <script>
+        window.addEventListener('load', function () {
+            fetch('data/config.json')
+                .then(response => response.json())
+                .then(config => {
+                    if (config.ga_measurement_id && config.ga_measurement_id !== 'GA_MEASUREMENT_ID') {
+                        const script = document.createElement('script');
+                        script.async = true;
+                        script.src = `https://www.googletagmanager.com/gtag/js?id=${config.ga_measurement_id}`;
+                        document.head.appendChild(script);
+
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag() { dataLayer.push(arguments); }
+                        window.gtag = gtag;
+                        gtag('js', new Date());
+                        gtag('config', config.ga_measurement_id);
+                    } else {
+                        console.warn('Google Analytics measurement ID is not set in config.json. Skipping GA initialization.');
+                    }
+                })
+                .catch(err => console.log('Config not loaded:', err));
+        });
+    </script>
+</body>
+
+</html>
