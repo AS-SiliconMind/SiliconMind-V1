@@ -32,6 +32,7 @@ uv sync  # or `pip install .`
 ### CLI Examples
 
 > Skip `uv run ` if you have run `source .venv/bin/activate` or installed the package globally.
+> Streaming mode is used by default for better interactivity. Add `--no-streaming` to disable.
 
 ```bash
 # Regular (default) — single solve pass

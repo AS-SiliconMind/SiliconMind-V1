@@ -1,3 +1,8 @@
+import uuid
+
+from vllm import SamplingParams
+from vllm.sampling_params import RequestOutputKind
+
 from siliconmind.utils import (
     get_attempt_prompts,
     get_debug_prompts,
@@ -81,3 +86,86 @@ def debug_batch(model, sampling_params, problems, attempts):
             if debug_code:
                 attempts[bad_indexes[i][0]] = debug_code
     return attempts
+
+
+# ---------------------------------------------------------------------------
+# Streaming support (AsyncLLM / V1 engine)
+# ---------------------------------------------------------------------------
+
+
+async def _stream_chat(engine, sampling_params, messages, tokenizer, print_fn=None):
+    """Stream a chat completion using AsyncLLM.
+
+    Prints token deltas via *print_fn* as they arrive and returns the full
+    accumulated text once generation is finished.
+    """
+    prompt = tokenizer.apply_chat_template(
+        messages, tokenize=False, add_generation_prompt=True
+    )
+
+    stream_params = SamplingParams(
+        temperature=sampling_params.temperature,
+        max_tokens=sampling_params.max_tokens,
+        output_kind=RequestOutputKind.DELTA,
+    )
+
+    request_id = str(uuid.uuid4())
+    full_text = ""
+
+    async for output in engine.generate(
+        request_id=request_id,
+        prompt=prompt,
+        sampling_params=stream_params,
+    ):
+        for completion in output.outputs:
+            if completion.text:
+                full_text += completion.text
+                if print_fn:
+                    print_fn(completion.text)
+        if output.finished:
+            break
+
+    return full_text
+
+
+async def solve_streaming(engine, sampling_params, problem, tokenizer, print_fn=None):
+    prompt = get_attempt_prompts([problem], internal_workflow=False)[0]
+    full_text = await _stream_chat(engine, sampling_params, prompt, tokenizer, print_fn)
+    return parse_code(full_text)
+
+
+async def unified_solve_streaming(
+    engine, sampling_params, problem, tokenizer, print_fn=None
+):
+    prompt = get_attempt_prompts([problem], internal_workflow=True)[0]
+    full_text = await _stream_chat(engine, sampling_params, prompt, tokenizer, print_fn)
+    return parse_code(full_text)
+
+
+async def debug_streaming(
+    engine, sampling_params, problem, attempt, tokenizer, print_fn=None
+):
+    # --- test phase (streamed) ---
+    test_prompt = get_test_prompts([problem], [attempt])[0]
+    full_text = await _stream_chat(
+        engine, sampling_params, test_prompt, tokenizer, print_fn
+    )
+    test = parse_text(full_text)
+
+    a = "[DESIGN IS CORRECT]" in test
+    b = "[DESIGN NEEDS FIXING]" in test
+    if (a and b) or (not a and not b):
+        return test, attempt
+    if a:
+        return test, attempt
+
+    # --- debug/fix phase (streamed) ---
+    debug_prompt = get_debug_prompts([problem], [attempt], [test])[0]
+    debug_text = await _stream_chat(
+        engine, sampling_params, debug_prompt, tokenizer, print_fn
+    )
+    debug_code = parse_code(debug_text)
+    if debug_code:
+        return test, debug_code
+    else:
+        return test, attempt
