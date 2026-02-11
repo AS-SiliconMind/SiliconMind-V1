@@ -6,7 +6,9 @@ This repository contains the codebase of SiliconMind Inference Engine for Silico
 - Paper: [SiliconMind-V1: Multi-Agent Distillation and Debug-Reasoning Workflows for Verilog Code Generation]()
 - Models: [SiliconMind-V1](https://huggingface.co/collections/AS-SiliconMind/siliconmind-v1)
 
-![Framework Overview](https://github.com/AS-SiliconMind/SiliconMind-V1/blob/gh-pages/images/figure-web.webp?raw=true)
+<p align="center">
+    <img src="https://github.com/AS-SiliconMind/SiliconMind-V1/blob/gh-pages/images/figure-workflow.webp?raw=true" alt="Framework Overview" width="400">
+</p>
 
 ## Features
 
