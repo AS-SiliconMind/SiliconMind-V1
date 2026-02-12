@@ -1,10 +1,21 @@
-# SiliconMind-V1
+<p align="center">
+    <img src="https://github.com/AS-SiliconMind/SiliconMind-V1/blob/gh-pages/images/logo.webp?raw=true" alt="SiliconMind Logo" width="400">
+</p>
+
+<h1><p align="center">
+SiliconMind-V1: Multi-Agent Distillation and Debug-Reasoning Workflows for Verilog Code Generation
+</p></h1>
+
+<div align="center">
+    <a href="https://arxiv.org/abs/1234.56789" target="_blank"><img alt="Hugging Face" src="https://img.shields.io/badge/arXiv-1234.56789-b31b1b.svg?style=flat" /></a>
+    <a href="https://huggingface.co/collections/AS-SiliconMind/siliconmind-v1" target="_blank"><img alt="Hugging Face" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-SiliconMind--V1-ffc107?color=ffc107&logoColor=white" /></a>
+</div>
+
+SiliconMind-V1 is a family of open-source Large Language Models (LLMs) specialized for Verilog code generation, testing, and debugging. Unlike previous approaches that rely heavily on commercial models or external EDA tools, SiliconMind-V1 is locally fine-tuned to iteratively generate, test, and debug RTL designs through test-time scaling.
 
 This repository contains the codebase of SiliconMind Inference Engine for SiliconMind-V1, a large language model (LLM) fine-tuned for Verilog code generation with multi-agent distillation and debug-reasoning workflows.
 
 - Webpage: https://AS-SiliconMind.github.io/SiliconMind-V1
-- Paper: [SiliconMind-V1: Multi-Agent Distillation and Debug-Reasoning Workflows for Verilog Code Generation]()
-- Models: [SiliconMind-V1 Series (4 fine-tuned models)](https://huggingface.co/collections/AS-SiliconMind/siliconmind-v1)
 
 <p align="center">
     <img src="https://github.com/AS-SiliconMind/SiliconMind-V1/blob/gh-pages/images/figure-workflow.webp?raw=true" alt="SiliconMind Inference Engine" width="400">
