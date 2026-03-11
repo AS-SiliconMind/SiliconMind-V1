@@ -7,8 +7,8 @@ SiliconMind-V1: Multi-Agent Distillation and Debug-Reasoning Workflows for Veril
 </p></h1>
 
 <div align="center">
-    <!-- <a href="https://arxiv.org/abs/1234.56789" target="_blank"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-1234.56789-b31b1b.svg?style=flat" /></a> -->
     <a href="https://drive.google.com/file/d/1-Ismn1EVEYBG1bxFYlE5NvOjakEk6RuC/view?usp=drive_link" target="_blank"><img alt="whitepaper" src="https://img.shields.io/badge/whitepaper-SiliconMind--V1-blue.svg?style=flat" /></a>
+    <a href="https://arxiv.org/abs/2603.08719" target="_blank"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2603.08719-b31b1b.svg?style=flat" /></a>
     <a href="https://huggingface.co/collections/AS-SiliconMind/siliconmind-v1" target="_blank"><img alt="Hugging Face" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-SiliconMind--V1-ffc107?color=ffc107&logoColor=white" /></a>
 </div>
 
