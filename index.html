@@ -156,6 +156,23 @@
             border-top: 1px solid var(--border-color);
             margin-top: 3rem
         }
+
+        /* Announcement styles (critical for first paint) */
+        #announcement { margin: 1rem 0; }
+        .announcement {
+            background: linear-gradient(180deg, #ffffff, #f6fbff);
+            border-left: 4px solid #2b7bb9;
+            padding: 0.9rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(43, 67, 95, 0.08);
+            color: var(--text-dark);
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        .announcement .announcement-label { font-weight: 700; color: #1f3a63; margin-right: 0.5rem; }
+        .announcement .announcement-content { display: inline; font-size: 1rem; }
+        .announcement.placeholder { color: transparent; }
     </style>
 
     <!-- Main CSS with low priority -->
@@ -173,6 +190,13 @@
             <h1 id="paper-title" class="placeholder">Loading Paper Title Here</h1>
             <p id="authors" class="authors placeholder">Loading authors here</p>
             <p id="affiliations" class="affiliations placeholder">Loading affiliations</p>
+        </section>
+
+        <section id="announcement" aria-live="polite" aria-atomic="true">
+            <div id="news-announcement" class="announcement placeholder" role="region" aria-label="Site announcement">
+                <strong class="announcement-label">Announcement:</strong>
+                <div id="news-content" class="announcement-content announcement-list placeholder">Loading latest news...</div>
+            </div>
         </section>
 
         <section id="links">

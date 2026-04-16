@@ -96,6 +96,40 @@ async function loadData() {
         overviewText.innerHTML = data.overview;
         overviewText.classList.remove('placeholder');
 
+        // Render news announcement if provided in config.json
+        const announcementSection = document.getElementById('announcement');
+        const newsAnnouncement = document.getElementById('news-announcement');
+        const newsContentEl = document.getElementById('news-content');
+        if (newsContentEl) {
+            if (Array.isArray(data.news) && data.news.length > 0) {
+                // Build a list of news items. Items may contain simple HTML from config (trusted).
+                const ul = document.createElement('ul');
+                ul.className = 'announcement-list';
+                data.news.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = item;
+                    ul.appendChild(li);
+                });
+                newsContentEl.innerHTML = '';
+                newsContentEl.appendChild(ul);
+                if (newsAnnouncement) {
+                    newsAnnouncement.classList.remove('placeholder');
+                    newsAnnouncement.style.display = '';
+                }
+                if (announcementSection) announcementSection.style.display = '';
+            } else if (typeof data.news === 'string' && data.news.trim()) {
+                // Single string (backwards compatibility)
+                newsContentEl.innerHTML = data.news;
+                if (newsAnnouncement) {
+                    newsAnnouncement.classList.remove('placeholder');
+                    newsAnnouncement.style.display = '';
+                }
+                if (announcementSection) announcementSection.style.display = '';
+            } else if (announcementSection) {
+                announcementSection.style.display = 'none';
+            }
+        }
+
         // Load and display acknowledgements if provided
         if (data.acknowledgements) {
             const acknowledgementsText = document.getElementById('acknowledgements-text');
