@@ -173,6 +173,99 @@
         .announcement .announcement-label { font-weight: 700; color: #1f3a63; margin-right: 0.5rem; }
         .announcement .announcement-content { display: inline; font-size: 1rem; }
         .announcement.placeholder { color: transparent; }
+
+        #spinout {
+            margin: 1.5rem 0 0;
+        }
+
+        .spinout-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: linear-gradient(135deg, #ffffff 0%, #edf6ff 100%);
+            border: 1px solid #d7e7f7;
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(31, 58, 99, 0.08);
+        }
+
+        .spinout-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .spinout-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #2b6cb0;
+        }
+
+        .spinout-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .spinout-subtitle {
+            color: var(--accent-color);
+        }
+
+        .spinout-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+
+        .spinout-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem 1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .spinout-link.primary {
+            background: var(--secondary-color);
+            color: #fff;
+            box-shadow: 0 8px 18px rgba(45, 55, 72, 0.2);
+        }
+
+        .spinout-link.secondary {
+            background: rgba(43, 108, 176, 0.12);
+            color: #1f4f82;
+        }
+
+        .spinout-link:hover {
+            transform: translateY(-1px);
+        }
+
+        .spinout-link.primary:hover {
+            background: #1f3a63;
+        }
+
+        .spinout-link.secondary:hover {
+            background: rgba(43, 108, 176, 0.2);
+        }
+
+        @media (max-width: 700px) {
+            .spinout-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .spinout-links {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
     </style>
 
     <!-- Main CSS with low priority -->
@@ -190,6 +283,20 @@
             <h1 id="paper-title" class="placeholder">Loading Paper Title Here</h1>
             <p id="authors" class="authors placeholder">Loading authors here</p>
             <p id="affiliations" class="affiliations placeholder">Loading affiliations</p>
+        </section>
+
+        <section id="spinout" aria-label="Spin-off startup">
+            <div class="spinout-card">
+                <div class="spinout-copy">
+                    <span class="spinout-label">Spin-off startup</span>
+                    <p class="spinout-title">SiliconMind</p>
+                    <p class="spinout-subtitle">Bringing the project into products and industry collaborations.</p>
+                </div>
+                <div class="spinout-links">
+                    <a class="spinout-link primary" href="https://siliconmind.co" target="_blank" rel="noopener noreferrer">Visit SiliconMind</a>
+                    <a class="spinout-link secondary" href="https://www.linkedin.com/company/siliconmind-co/" target="_blank" rel="noopener noreferrer">LinkedIn @siliconmindco</a>
+                </div>
+            </div>
         </section>
 
         <section id="announcement" aria-live="polite" aria-atomic="true">

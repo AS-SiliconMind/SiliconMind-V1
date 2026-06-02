@@ -219,6 +219,87 @@ main {
 .announcement .announcement-content { font-size: 1rem; }
 .announcement.placeholder { color: transparent; }
 
+#spinout {
+    margin: 1.5rem 0 0;
+}
+
+.spinout-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, #ffffff 0%, #edf6ff 100%);
+    border: 1px solid #d7e7f7;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(31, 58, 99, 0.08);
+}
+
+.spinout-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.spinout-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #2b6cb0;
+}
+
+.spinout-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.spinout-subtitle {
+    color: var(--accent-color);
+}
+
+.spinout-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.spinout-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.spinout-link.primary {
+    background: var(--secondary-color);
+    color: white;
+    box-shadow: 0 8px 18px rgba(45, 55, 72, 0.2);
+}
+
+.spinout-link.secondary {
+    background: rgba(43, 108, 176, 0.12);
+    color: #1f4f82;
+}
+
+.spinout-link:hover {
+    transform: translateY(-1px);
+}
+
+.spinout-link.primary:hover {
+    background: #1f3a63;
+}
+
+.spinout-link.secondary:hover {
+    background: rgba(43, 108, 176, 0.2);
+}
+
 /* Announcement list styles */
 .announcement .announcement-content ul.announcement-list {
     list-style: none;
@@ -454,6 +535,16 @@ footer p {
 
     .results-content {
         grid-template-columns: 1fr;
+    }
+
+    .spinout-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .spinout-links {
+        width: 100%;
+        justify-content: flex-start;
     }
 
     main {
